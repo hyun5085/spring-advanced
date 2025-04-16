@@ -26,14 +26,20 @@ public class WeatherClient {
         ResponseEntity<WeatherDto[]> responseEntity =
                 restTemplate.getForEntity(buildWeatherApiUri(), WeatherDto[].class);
 
+        // 일단 날씨 데이터가 정상적으로 응답했는지 확인!
         WeatherDto[] weatherArray = responseEntity.getBody();
         if (!HttpStatus.OK.equals(responseEntity.getStatusCode())) {
             throw new ServerException("날씨 데이터를 가져오는데 실패했습니다. 상태 코드: " + responseEntity.getStatusCode());
-        } else {
-            if (weatherArray == null || weatherArray.length == 0) {
-                throw new ServerException("날씨 데이터가 없습니다.");
-            }
         }
+
+        // 어차피 다음 회로로 넘어오기 위해서는 OK가 되어 있는 상태에서 넘어올 수 있는데 else를 굳이 사용하지 않아도
+        // else를 굳이 사용하지 않아도 되는 것을 알 수 있음!
+
+        // 정상적으로 응답이 되어있으면 안에 데이터가 있는지 여부 확인
+        if (weatherArray == null || weatherArray.length == 0) {
+                throw new ServerException("날씨 데이터가 없습니다.");
+        }
+
 
         String today = getCurrentDate();
 
