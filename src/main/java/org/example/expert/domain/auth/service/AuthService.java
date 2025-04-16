@@ -26,7 +26,7 @@ public class AuthService {
     @Transactional
     public SignupResponse signup(SignupRequest signupRequest) {
 
-        // 비밀번호 암호화 하기 전에 미리 Check 해서 불필요한 동작? 하지 않게 미리 검진
+        // 비밀번호 암호화 하기 전에 미리 Check 해서 불필요한 동작? 하지 않게 먼저 검사
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             throw new InvalidRequestException("이미 존재하는 이메일입니다.");
         }
