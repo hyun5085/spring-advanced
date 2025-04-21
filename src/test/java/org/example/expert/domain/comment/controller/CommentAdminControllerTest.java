@@ -10,7 +10,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,7 +24,7 @@ class CommentAdminControllerTest {
     CommentAdminService commentAdminService;
 
     @Test
-    void deleteComment_정상작동() throws Exception {
+    void deleteComment_정상작동_로그확인() throws Exception {
         long commentId = 1L;
 
         mockMvc.perform(delete("/admin/comments/{commentId}", commentId))
